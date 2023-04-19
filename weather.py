@@ -17,13 +17,14 @@ def search_city(query):
         print(f"Sorry, we don't have information about {query}!")
         return None
     if len(cities)==1:
-        return (cities_list[0])
-    elif len(cities)>1:
+        return cities[0]
+    if len(cities)>1:
         print('Multiple matches found, which city did you mean?')
         for index, city in enumerate (cities):
             print(f"{index + 1}. {city['name']}, {city['country']}")
-        index_chosen = int(input("Multiple matches found, which city did you mean?\n> "))-1 
-        return (cities[index_chosen])
+        index_chosen = int(input("Multiple matches found, which city did you mean?\n> "))-1
+        return cities[index_chosen]
+    return None
 
 
 
@@ -39,7 +40,6 @@ def main():
     query = input("City?\n> ")
     city = search_city(query)
 
-    # TODO: Display weather forecast for a given city
     if city:
         daily_forecasts = weather_forecast(city['lat'], city['lon'])
 
